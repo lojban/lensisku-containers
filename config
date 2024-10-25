@@ -1,0 +1,3 @@
+bundle=lensisku
+web_port=20380
+pod_args="-p $web_port:$web_port"
