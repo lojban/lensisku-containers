@@ -9,3 +9,6 @@ containers/db/Dockerfile
 containers/mav/Dockerfile
 containers/mav/mail-archive-viewer/
 cron/crontab
+secrets
+containers/db/data
+containers/mav/data

@@ -1,0 +1,21 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+FROM debian:bookworm-slim
+
+WORKDIR /src
+
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y ca-certificates nginx libterm-readline-perl-perl python3-full wget procps unzip
+
+COPY misc/mav-nginx.conf /etc/nginx/nginx.conf
+
+RUN chown -R <%= userid %>:<%= groupid %> /var/lib/nginx /var/log/nginx /run
+
+ENV DB_USER=lensisku
+ENV DB_PASSWORD=<%= db_password %>
+ENV DB_NAME=lensisku
+ENV JWT_SECRET=<%= jwt_secret %>
+ENV MAILDIR_PATH=/data/maildir

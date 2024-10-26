@@ -1,0 +1,10 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+FROM docker.io/library/postgres:16.4
+
+ENV POSTGRES_USER=lensisku
+ENV POSTGRES_PASSWORD=<%= db_password %>
+ENV POSTGRES_DB=lensisku

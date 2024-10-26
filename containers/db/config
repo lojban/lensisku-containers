@@ -1,0 +1,5 @@
+description="lensisku's db container"
+needs_network=true
+name=db
+version=1
+run_args='-v $containerdir/data:/var/lib/postgresql/data'
