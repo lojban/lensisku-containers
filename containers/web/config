@@ -1,0 +1,6 @@
+description="container for running lensisku"
+needs_network=true
+name=web
+version=1
+run_args="-v $containerdir/data:/data -v $containerdir/src:/src"
+run_program='bash -c "service nginx start && /src/target/release/lensisku"'

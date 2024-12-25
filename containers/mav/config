@@ -1,6 +1,0 @@
-description="container for running mail-archive-viewer"
-needs_network=true
-name=mav
-version=1
-run_args="-v $containerdir/data:/data -v $containerdir/mail-archive-viewer:/src"
-run_program='bash -c "/usr/sbin/nginx ; service nginx start && /src/target/release/lensisku"'
