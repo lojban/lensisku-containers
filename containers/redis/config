@@ -1,0 +1,6 @@
+description="lensisku's redis container"
+needs_network=true
+name=redis
+version=1
+run_args='-v $containerdir/data:/data -v $containerdir/backups:/srv/backups'
+run_program='redis-server --appendonly yes'
