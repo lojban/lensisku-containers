@@ -5,10 +5,13 @@
 # helps ripgrep not be silly
 .git
 
+containers/web/Dockerfile
 containers/db/Dockerfile
-containers/mav/Dockerfile
-containers/mav/mail-archive-viewer/
+containers/redis/Dockerfile
+containers/web/src/
 cron/crontab
 secrets
 containers/db/data
-containers/mav/data
+containers/web/data
+containers/redis/data
+containers/db/backups/

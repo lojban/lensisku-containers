@@ -1,0 +1,9 @@
+When you actually update the source (i.e. the stuff in
+containers/web/src/ ), you need to:
+
+$ cd ~/lensisku/containers/web/src/building/
+$ ./build-npm.sh
+$ ./build-rust.sh
+
+We don't do this in a pre-script or something because it runs its
+own specialized docker containers.
