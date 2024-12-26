@@ -5,6 +5,12 @@
 
 FROM docker.io/library/postgres:16.4
 
+RUN mkdir /srv/backups
+
 ENV POSTGRES_USER=lensisku
+ENV PGUSER=lensisku
 ENV POSTGRES_PASSWORD=<%= db_password %>
 ENV POSTGRES_DB=lensisku
+ENV PGDATABASE=lensisku
+
+COPY ./misc/pgbackup.sh /usr/local/bin/pgbackup.sh

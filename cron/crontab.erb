@@ -8,4 +8,18 @@ LANG=en_US.UTF-8
 MAILTO=webmaster@lojban.org
 # Rebuild images every once in a while so we don't have surprises after a reboot of the host
 49 */5 * * *  <%= maindir %>/rebuild_images.sh
+
+# Grab new copies of the lojban list mail
 5 5 * * *     <%= maindir %>/cron/cron-run-inside.sh web /src/fetch_mail.sh 2>&1 | fold -w 100
+
+# Database backups; they end up in containers/db/backups/
+4 4 * * * <%= maindir %>/cron/cron-run-inside.sh db /usr/local/bin/pgbackup.sh
+
+# Daily backups; 7 day retention
+2 2 * * * <%= maindir %>/self_backup.sh zh1785@zh1785.rsync.net '+day-\%w' 2>&1 | fold -w 300
+
+# Weekly backups; 52 week retention
+3 3 * * * <%= maindir %>/self_backup.sh zh1785@zh1785.rsync.net '+week-\%W' 2>&1 | fold -w 300
+
+# Daily restore test
+4 4 * * * <%= maindir %>/self_restore_test.sh zh1785@zh1785.rsync.net webmaster@lojban.org 2>&1 | fold -w 300
