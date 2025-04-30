@@ -15,3 +15,5 @@ containers/db/data
 containers/web/data
 containers/redis/data
 containers/db/backups/
+containers/infinity/Dockerfile
+containers/infinity/data

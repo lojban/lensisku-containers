@@ -1,0 +1,6 @@
+description="lensisku's infinity container"
+needs_network=true
+name=infinity
+version=1
+run_args='-v $containerdir/data:/app/.cache --cpus 2.0 --memory 4g'
+run_program='v2 --engine optimum --model-id sentence-transformers/all-MiniLM-L6-v2 --port 3000'
