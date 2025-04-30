@@ -30,10 +30,12 @@ ENV DB_IMPORT_POOL_SIZE=5
 ENV JWT_SECRET=<%= jwt_secret %>
 ENV MAILDIR_PATH=/data/maildir
 ENV REFRESH_TOKEN_SECRET=<%= refresh_token_secret %>
+ENV WISE_SANDBOX_MODE="true"
+ENV WISE_TARGET_ACCOUNT_ID=<%= wise_target_account_id %>
+ENV WISE_WEBHOOK_SECRET=<%= wise_webhook_secret %>
+ENV WISE_API_KEY=<%= wise_api_key %>
 
 ENV REDIS_URL=redis://localhost:6379
-
-ENV MAILDIR_PATH=./maildir
 
 ENV TOKEN_EXPIRY_MINUTES=15
 

@@ -3,3 +3,4 @@ needs_network=true
 name=db
 version=1
 run_args='-v $containerdir/data:/var/lib/postgresql/data -v $containerdir/backups:/srv/backups'
+run_program='postgres -c shared_preload_libraries=vector'
