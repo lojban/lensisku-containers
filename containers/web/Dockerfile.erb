@@ -15,7 +15,9 @@ RUN apt-get update && apt-get install -y ca-certificates nginx libterm-readline-
     texlive-latex-extra \
     texlive-lang-chinese \
     texlive-lang-japanese \
+    texlive-lang-indic \
     fonts-noto-cjk fonts-noto-cjk-extra \
+    fonts-noto-core fonts-noto-extra \
     fonts-linuxlibertine
 
 COPY misc/nginx.conf /etc/nginx/nginx.conf
