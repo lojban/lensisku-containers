@@ -1,11 +1,11 @@
-description="lensisku's redis container"
+description="lensisku's DEV redis container"
 # NOTE: bundle normally goes in the main config, but we have
 # separate pods for prod and dev
-bundle=lensisku
+bundle=lensisku-dev
 # NOTE: pod_args has to be duplicated here for the same reason
-pod_args="-p 20380:20380"
+pod_args="-p 20390:20390"
 needs_network=true
-name=redis
+name=redis-dev
 version=1
 run_args='-v $containerdir/data:/data -v $containerdir/backups:/srv/backups'
 run_program='redis-server --appendonly yes'

@@ -1,0 +1,16 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+FROM docker.io/pgvector/pgvector:pg18-trixie
+
+RUN mkdir /srv/backups
+
+ENV POSTGRES_USER=lensisku
+ENV PGUSER=lensisku
+ENV POSTGRES_PASSWORD=<%= dev_db_password %>
+ENV POSTGRES_DB=lensisku
+ENV PGDATABASE=lensisku
+
+COPY ./misc/pgbackup.sh /usr/local/bin/pgbackup.sh

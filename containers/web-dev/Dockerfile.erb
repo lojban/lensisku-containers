@@ -1,0 +1,40 @@
+<%= "\n"*30 %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+<%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
+<%= "# YOU ARE IN THE WRONG PLACE" %>
+
+FROM debian:trixie-slim
+
+WORKDIR /src
+
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y ca-certificates nginx-full libterm-readline-perl-perl python3-full wget procps unzip libgraphite2-dev libharfbuzz-dev \
+    texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-chinese texlive-lang-japanese fonts-noto-cjk fonts-noto-cjk-extra \
+    fonts-linuxlibertine libicu76
+
+COPY misc/nginx-dev.conf /etc/nginx/nginx.conf
+
+RUN chown -R <%= userid %>:<%= groupid %> /var/lib/nginx /var/log/nginx /run
+
+ENV DB_USER=lensisku
+ENV DB_PASSWORD=<%= dev_db_password %>
+ENV DB_NAME=lensisku
+ENV DB_APP_POOL_SIZE=20
+ENV DB_IMPORT_POOL_SIZE=5
+ENV JWT_SECRET=<%= dev_jwt_secret %>
+ENV MAILDIR_PATH=/data/maildir
+ENV REFRESH_TOKEN_SECRET=<%= dev_refresh_token_secret %>
+
+ENV REDIS_URL=redis://localhost:6379
+
+ENV TOKEN_EXPIRY_MINUTES=15
+
+ENV SMTP_HOST=mail.lojban.org
+ENV SMTP_PORT=25
+ENV SMTP_USERNAME=gleki
+ENV SMTP_PASSWORD=<%= gleki_smtp_pass %>
+ENV SMTP_FROM_ADDRESS=webmaster@lojban.org
+
+ENV FRONTEND_URL=https://lensisku.lojban.org
+
+ENV INFINITY_URL=http://localhost:3000

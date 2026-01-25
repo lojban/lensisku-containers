@@ -1,3 +1,10 @@
-bundle=lensisku
-web_port=20380
-pod_args="-p $web_port:$web_port"
+## NO BUNDLE HERE, because bundle defines the pod name and we're
+## using two pods, one for prod and one for dev
+## bundle=lensisku
+
+## No pod_args for the same reason, those have to be duplicated in
+## every container in this config, but meh.
+## prod_web_port=20380
+## dev_web_port=20390
+## pod_args="-p $prod_web_port:$prod_web_port,$dev_web_port:$dev_web_port"
+backup_extra_excludes='--exclude=.pnpm'

@@ -1,0 +1,11 @@
+description="lensisku's DEV infinity (semantic search) container"
+# NOTE: bundle normally goes in the main config, but we have
+# separate pods for prod and dev
+bundle=lensisku-dev
+# NOTE: pod_args has to be duplicated here for the same reason
+pod_args="-p 20390:20390"
+needs_network=true
+name=infinity-dev
+version=1
+run_args='-v $containerdir/data:/app/.cache --cpus 2.0 --memory 8g'
+run_program='v2 --engine optimum --model-id sentence-transformers/all-MiniLM-L6-v2 --port 3000'

@@ -1,4 +1,9 @@
-description="lensisku's infinity container"
+description="lensisku's infinity (semantic search) container"
+# NOTE: bundle normally goes in the main config, but we have
+# separate pods for prod and dev
+bundle=lensisku
+# NOTE: pod_args has to be duplicated here for the same reason
+pod_args="-p 20380:20380"
 needs_network=true
 name=infinity
 version=1
