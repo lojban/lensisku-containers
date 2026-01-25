@@ -3,39 +3,27 @@
 <%= "# YOU ARE IN THE WRONG PLACE use the ERB file" %>
 <%= "# YOU ARE IN THE WRONG PLACE" %>
 
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 WORKDIR /src
 
 # Install necessary dependencies
-RUN apt-get update && apt-get install -y ca-certificates nginx libterm-readline-perl-perl python3-full wget procps unzip libgraphite2-dev libharfbuzz-dev \
-    texlive-xetex \
-    texlive-fonts-recommended \
-    texlive-fonts-extra \
-    texlive-latex-extra \
-    texlive-lang-chinese \
-    texlive-lang-japanese \
-    texlive-lang-indic \
-    fonts-noto-cjk fonts-noto-cjk-extra \
-    fonts-noto-core fonts-noto-extra \
-    fonts-linuxlibertine
+RUN apt-get update && apt-get install -y ca-certificates nginx-full libterm-readline-perl-perl python3-full wget procps unzip libgraphite2-dev libharfbuzz-dev \
+    texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-chinese texlive-lang-japanese texlive-lang-indic \
+    fonts-noto-cjk fonts-noto-cjk-extra fonts-linuxlibertine libicu76
 
 COPY misc/nginx.conf /etc/nginx/nginx.conf
 
 RUN chown -R <%= userid %>:<%= groupid %> /var/lib/nginx /var/log/nginx /run
 
 ENV DB_USER=lensisku
-ENV DB_PASSWORD=<%= db_password %>
+ENV DB_PASSWORD=<%= prod_db_password %>
 ENV DB_NAME=lensisku
 ENV DB_APP_POOL_SIZE=20
 ENV DB_IMPORT_POOL_SIZE=5
-ENV JWT_SECRET=<%= jwt_secret %>
+ENV JWT_SECRET=<%= prod_jwt_secret %>
 ENV MAILDIR_PATH=/data/maildir
-ENV REFRESH_TOKEN_SECRET=<%= refresh_token_secret %>
-ENV WISE_SANDBOX_MODE="true"
-ENV WISE_TARGET_ACCOUNT_ID=<%= wise_target_account_id %>
-ENV WISE_WEBHOOK_SECRET=<%= wise_webhook_secret %>
-ENV WISE_API_KEY=<%= wise_api_key %>
+ENV REFRESH_TOKEN_SECRET=<%= prod_refresh_token_secret %>
 
 ENV REDIS_URL=redis://localhost:6379
 
