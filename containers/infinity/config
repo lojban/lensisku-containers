@@ -1,4 +1,5 @@
 description="lensisku's infinity (semantic search) container"
+# NOTE: Rust backend expects Xenova/all-MiniLM-L6-v2 (384-dim). For MCP-aligned semantic search use infinity-dev (Xenova). This prod config uses bge-m3; switch to Xenova if you need same embeddings as dev/MCP.
 # NOTE: bundle normally goes in the main config, but we have
 # separate pods for prod and dev
 bundle=lensisku
@@ -8,4 +9,4 @@ needs_network=true
 name=infinity
 version=1
 run_args='-v $containerdir/data:/app/.cache --cpus 2.0 --memory 8g'
-run_program='v2 --engine torch --model-id BAAI/bge-m3 --port 3000'
+run_program='v2 --engine optimum --model-id Xenova/all-MiniLM-L6-v2 --port 3000'
