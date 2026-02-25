@@ -8,7 +8,7 @@ FROM debian:trixie-slim
 WORKDIR /src
 
 # Install necessary dependencies
-RUN apt-get update && apt-get install -y ca-certificates nginx-full libterm-readline-perl-perl python3-full wget procps unzip libgraphite2-dev libharfbuzz-dev \
+RUN apt-get update && apt-get install -y ca-certificates nginx-full libterm-readline-perl-perl python3-full python3-psycopg2 wget procps unzip libgraphite2-dev libharfbuzz-dev \
     texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-chinese texlive-lang-japanese texlive-lang-other \
     fonts-noto-cjk fonts-noto-cjk-extra fonts-linuxlibertine libicu76
 
