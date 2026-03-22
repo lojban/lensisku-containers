@@ -28,3 +28,4 @@ containers/web-dev/data/
 containers/redis-dev/data/
 containers/infinity-dev/data/
 containers/db-dev/backups/
+.specstory/*
