@@ -8,4 +8,4 @@ needs_network=true
 name=web-dev
 version=1
 run_args="-v $containerdir/data:/data -v $containerdir/src:/src"
-run_program='bash -c "service nginx start && /src/target/release/lensisku"'
+run_program='bash -c "service nginx start && DISABLE_DICTIONARY_EXPORT=1 /src/target/release/lensisku 2>&1 | tee /data/lensisku.log"'

@@ -39,4 +39,7 @@ ENV FRONTEND_URL=https://lensisku.lojban.org
 
 ENV INFINITY_URL=http://localhost:3000
 
+# Dev container: skip dictionary export cache rebuilds at startup to avoid xelatex hangs.
+ENV DISABLE_DICTIONARY_EXPORT=1
+
 ENV OPENROUTER_API_KEY=<%= dev_openrouter_api_key %>
