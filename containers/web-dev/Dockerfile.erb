@@ -42,4 +42,13 @@ ENV INFINITY_URL=http://localhost:3000
 # Dev container: skip dictionary export cache rebuilds at startup to avoid xelatex hangs.
 ENV DISABLE_DICTIONARY_EXPORT=1
 
+# secrets file must define: dev_openrouter_api_key=...
 ENV OPENROUTER_API_KEY=<%= dev_openrouter_api_key %>
+
+# Social login (keys from repo-root `secrets`; empty values omit the provider at runtime)
+ENV GITHUB_CLIENT_ID=<%= dev_github_client_id %>
+ENV GITHUB_CLIENT_SECRET=<%= dev_github_client_secret %>
+ENV GITHUB_REDIRECT_URL=https://lensisku-dev.lojban.org/oauth/github
+ENV GOOGLE_CLIENT_ID=<%= dev_google_client_id %>
+ENV GOOGLE_CLIENT_SECRET=<%= dev_google_client_secret %>
+ENV GOOGLE_REDIRECT_URL=https://lensisku-dev.lojban.org/oauth/google

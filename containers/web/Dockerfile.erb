@@ -40,3 +40,11 @@ ENV FRONTEND_URL=https://lensisku.lojban.org
 ENV INFINITY_URL=http://localhost:3000
 
 ENV OPENROUTER_API_KEY=<%= prod_openrouter_api_key %>
+
+# Social login (keys from repo-root `secrets`; empty values omit the provider at runtime)
+ENV GITHUB_CLIENT_ID=<%= prod_github_client_id %>
+ENV GITHUB_CLIENT_SECRET=<%= prod_github_client_secret %>
+ENV GITHUB_REDIRECT_URL=https://lensisku.lojban.org/oauth/github
+ENV GOOGLE_CLIENT_ID=<%= prod_google_client_id %>
+ENV GOOGLE_CLIENT_SECRET=<%= prod_google_client_secret %>
+ENV GOOGLE_REDIRECT_URL=https://lensisku.lojban.org/oauth/google
