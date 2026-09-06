@@ -7,7 +7,9 @@ FROM debian:trixie-slim
 
 WORKDIR /src
 
-# Install necessary dependencies (libopus0: valsi TTS / audio/ogg dynamic link)
+# Install necessary dependencies:
+# - libopus0: valsi/Kokoro TTS → audio/ogg (dynamic link at runtime)
+# - ca-certificates: HTTPS to Hugging Face for Kokoro ONNX download (not baked into image)
 RUN apt-get update && apt-get install -y ca-certificates nginx-full libterm-readline-perl-perl python3-full python3-psycopg2 wget procps unzip libgraphite2-dev libharfbuzz-dev \
     texlive-xetex texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra texlive-lang-chinese texlive-lang-japanese fonts-noto-cjk fonts-noto-cjk-extra \
     fonts-linuxlibertine libicu76 libopus0
@@ -34,6 +36,10 @@ ENV SMTP_PORT=25
 ENV SMTP_USERNAME=gleki
 ENV SMTP_PASSWORD=<%= gleki_smtp_pass %>
 ENV SMTP_FROM_ADDRESS=webmaster@lojban.org
+
+# Kokoro Martin TTS: ONNX + voicepack downloaded from Hugging Face on first use;
+# cached under /data (persisted via container data volume), not embedded in the image.
+ENV KOKORO_TTS_CACHE_DIR=/data/cache/kokoro-martin
 
 ENV FRONTEND_URL=https://lensisku.lojban.org
 

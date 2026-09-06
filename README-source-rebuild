@@ -5,5 +5,9 @@ $ cd ~/lensisku/containers/web/src/building/
 $ ./build-npm.sh
 $ ./build-rust.sh
 
+Those scripts build from `Dockerfile.npm` (`node:alpine` + `pnpm@latest`)
+and `Dockerfile.rust` (`rust:latest` + `rustup update stable`). Rebuild
+the images so they pick up the current latest tags.
+
 We don't do this in a pre-script or something because it runs its
 own specialized docker containers.
