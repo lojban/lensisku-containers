@@ -7,8 +7,24 @@ $ ./build-rust.sh
 
 Those scripts build from `Dockerfile.npm` (`node:24-alpine` +
 Corepack/`packageManager` pin from `frontend/package.json`, currently
-`pnpm@12.3.4`) and `Dockerfile.rust` (`rust:latest` + `rustup update
-stable`). Rebuild the images so they pick up the pinned toolchain.
+`pnpm@12.3.4`) and `Dockerfile.rust` (`rust:1.98.1-trixie` + pinned
+`nightly-2026-09-29`). The Rust helper builds its image automatically and
+defaults to the release-fast Cargo profile. For stable Rust and maximum runtime
+optimization, use:
+
+$ RUST_TOOLCHAIN=1.98.1 CARGO_BUILD_PROFILE=release ./build-rust.sh
+
+Compiled dependencies and incremental artifacts remain in the source checkout's
+target/container/ directory across helper runs. The executable is copied to
+target/release/lensisku, which both web and web-dev run from the /src bind mount.
+Removing containers or rebuilding runtime images does not delete this cache.
+Remove target/container/ explicitly if a clean build is needed.
+
+The Trixie Rust builder matches the runtime's native libraries, including ICU 76.
+Repeat these source build steps in containers/web-dev/src/building/ when updating
+the dev deployment. LBCS build_image.sh/rebuild_images.sh only rebuild runtime
+images; they do not compile the application. The root Lensisku Dockerfile is a
+separate build path and is not used by this deployment.
 
 We don't do this in a pre-script or something because it runs its
 own specialized docker containers.
