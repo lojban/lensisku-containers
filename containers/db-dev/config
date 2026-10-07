@@ -7,5 +7,5 @@ pod_args="-p 20390:20390"
 needs_network=true
 name=db-dev
 version=1
-run_args='-v $containerdir/data:/var/lib/postgresql/data -v $containerdir/backups:/srv/backups'
+run_args='-v $containerdir/data:/var/lib/postgresql -v $containerdir/backups:/srv/backups'
 run_program='postgres -c shared_preload_libraries=vector'

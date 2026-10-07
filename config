@@ -1,6 +1,7 @@
 ## NO BUNDLE HERE, because bundle defines the pod name and we're
 ## using two pods, one for prod and one for dev
 ## bundle=lensisku
+nobundle=true
 
 ## No pod_args for the same reason, those have to be duplicated in
 ## every container in this config, but meh.
