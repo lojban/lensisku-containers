@@ -8,11 +8,24 @@ $ ./build-rust.sh
 Those scripts build from `Dockerfile.npm` (`node:24-alpine` +
 Corepack/`packageManager` pin from `frontend/package.json`, currently
 `pnpm@12.3.4`) and `Dockerfile.rust` (`rust:1.98.1-trixie` + pinned
-`nightly-2026-09-29`). The Rust helper builds its image automatically and
-defaults to the release-fast Cargo profile. For stable Rust and maximum runtime
-optimization, use:
+`nightly-2026-09-29`, `mold`, and `rustc-codegen-cranelift-preview`).
+The source tree requires that nightly (see `rust-toolchain.toml`);
+`.cargo/config.toml` enables mold, `-Zthreads=8`, and Cranelift for
+`dev`/`test` only. The Rust helper builds its image automatically and
+defaults to the release-fast Cargo profile (opt-level 3, no cross-crate
+LTO, 16 codegen units, incremental, LLVM — not Cranelift).
 
-$ RUST_TOOLCHAIN=1.98.1 CARGO_BUILD_PROFILE=release ./build-rust.sh
+Rebuild the `build-rust` image after pulling source that changes
+`building/Dockerfile.rust` (e.g. `podman rmi build-rust` then re-run
+`./build-rust.sh`) so the builder picks up mold, Cranelift, and other
+packages.
+
+For maximum runtime optimization on the same nightly:
+
+$ CARGO_BUILD_PROFILE=release ./build-rust.sh
+
+(`release` keeps fat LTO + codegen-units=1 on LLVM. Stable toolchains are
+not supported while `.cargo/config.toml` uses nightly-only flags.)
 
 Compiled dependencies and incremental artifacts remain in the source checkout's
 target/container/ directory across helper runs. The executable is copied to
@@ -21,6 +34,7 @@ Removing containers or rebuilding runtime images does not delete this cache.
 Remove target/container/ explicitly if a clean build is needed.
 
 The Trixie Rust builder matches the runtime's native libraries, including ICU 76.
+Runtime web/web-dev images do not compile Rust and do not need `mold`.
 Repeat these source build steps in containers/web-dev/src/building/ when updating
 the dev deployment. LBCS build_image.sh/rebuild_images.sh only rebuild runtime
 images; they do not compile the application. The root Lensisku Dockerfile is a
