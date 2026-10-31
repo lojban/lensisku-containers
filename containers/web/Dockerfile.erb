@@ -54,3 +54,8 @@ ENV GITHUB_REDIRECT_URL=https://lensisku.lojban.org/oauth/github
 ENV GOOGLE_CLIENT_ID=<%= prod_google_client_id %>
 ENV GOOGLE_CLIENT_SECRET=<%= prod_google_client_secret %>
 ENV GOOGLE_REDIRECT_URL=https://lensisku.lojban.org/oauth/google
+
+# Optional Cloudflare zone cache purge credentials. The API token needs Zone / Cache Purge.
+# secrets file may define: prod_cloudflare_api_token=... and prod_cloudflare_zone_id=... (unset or empty disables purging)
+ENV CLOUDFLARE_API_TOKEN=<%= defined?(prod_cloudflare_api_token) ? prod_cloudflare_api_token : '' %>
+ENV CLOUDFLARE_ZONE_ID=<%= defined?(prod_cloudflare_zone_id) ? prod_cloudflare_zone_id : '' %>
