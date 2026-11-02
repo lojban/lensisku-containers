@@ -31,8 +31,8 @@ ENV REDIS_URL=redis://localhost:6379
 
 ENV TOKEN_EXPIRY_MINUTES=15
 
-ENV SMTP_HOST=mail.lojban.org
-ENV SMTP_PORT=25
+ENV SMTP_HOST=lojban-mail-local-ip
+ENV SMTP_PORT=587
 ENV SMTP_USERNAME=gleki
 ENV SMTP_PASSWORD=<%= gleki_smtp_pass %>
 ENV SMTP_FROM_ADDRESS=webmaster@lojban.org
